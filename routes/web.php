@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\user\UserController;
+use App\Http\Controllers\admin\AdminController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,16 +17,11 @@ use App\Http\Controllers\user\UserController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::prefix('/admin')->name('admin.')->group(function(){
-	Route::view('/login','dashboard.admin.login')->name('login');
-
-});
 
 
 Route::prefix('user')->name('user.')->group(function(){
@@ -35,4 +32,7 @@ Route::prefix('user')->name('user.')->group(function(){
 	Route::view('home','dashboard.user.home')->name('home');
 });
 
-
+Route::prefix('admin')->name('admin.')->group(function(){
+	Route::view('login','dashboard.admin.login')->name('login');
+	Route::post('check',[AdminController::class,'index'])->name('check');
+});

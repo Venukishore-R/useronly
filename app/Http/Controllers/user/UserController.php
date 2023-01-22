@@ -15,7 +15,10 @@ class UserController extends Controller
             'email'=>'required|email|unique:users,email',
             'password'=>'required|min:5|max:30',
             'cpassword'=>'required|min:5|max:30|same:password'
-    	]);
+    	],
+        [
+            'email.exists'=>'This email is not exists in admins table'
+        ]);
 
     	$client = new Client();
 
@@ -33,8 +36,12 @@ class UserController extends Controller
     }
 
 
-    public function index(){
+    public function index(Request $request){
 
+        $request->validate([
+            'email'=>'required|email|unique:users,email',
+            'password'=>'required|min:5|max:30',
+        ]);
 
         $clients = Client::all();
         return view('dashboard.user.home',['clients'=>$clients]);

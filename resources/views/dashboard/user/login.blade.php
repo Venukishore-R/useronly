@@ -10,9 +10,8 @@
 	<form action="{{ route('user.check') }}" method="POST">
 		@csrf
 		Email:<input type="email" name="email"><br><br>
-		Password:<input type="Password" name="password"><br><br>
+		Password:<input type="password" name="password"><br><br>
 		<button type="submit" value="submit">submit</button>
-		
 	</form>
 </body>
 </html>
