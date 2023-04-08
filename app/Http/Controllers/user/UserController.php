@@ -46,4 +46,6 @@ class UserController extends Controller
         $clients = Client::all();
         return view('dashboard.user.home',['clients'=>$clients]);
     }
+
+   
 }

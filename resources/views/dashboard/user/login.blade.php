@@ -2,6 +2,12 @@
 <html>
 <head>
 	<title>User Login</title>
+	<style type="text/css">
+		
+		.invalid-feedback{
+			color: red;
+		}
+	</style>
 </head>
 <body>
 	<h1>User Login</h1>
@@ -9,8 +15,24 @@
 	<p>Now you can login as a user</p>
 	<form action="{{ route('user.check') }}" method="POST">
 		@csrf
-		Email:<input type="email" name="email"><br><br>
-		Password:<input type="password" name="password"><br><br>
+		Email:<input type="email" name="email" value="{{ old('email') }}">
+		@error('email')
+        <span class="invalid-feedback" role="alert">
+        	<strong>{{ $message }}</strong>
+        </span>
+        @enderror
+
+        <br><br>
+		
+		Password:<input type="password" name="password">
+		@error('password')
+        <span class="invalid-feedback" role="alert">
+        	<strong>{{ $message }}</strong>
+        </span>
+        @enderror
+
+        <br><br>
+		
 		<button type="submit" value="submit">submit</button>
 	</form>
 </body>
